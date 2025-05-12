@@ -1,50 +1,68 @@
-# Welcome to your Expo app 👋
+# Tic Tac Toe AI (React Native + Expo)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is a simple mobile implementation of the classic **Tic Tac Toe** game, developed using **React Native**, **Expo**, and styled with **NativeWind**. The game supports human vs AI gameplay with an AI agent powered by the **Minimax algorithm**.
 
-## Get started
+---
 
-1. Install dependencies
+## 🎮 Game Features
 
-   ```bash
-   npm install
-   ```
+- Play as **X** or **O**
+- Intelligent AI opponent using **Minimax** for optimal decisions
+- Displays current turn and endgame status (win/draw)
+- Option to restart the game at any time
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## 🤖 AI Implementation (Minimax Algorithm)
 
-In the output, you'll find options to open the app in a
+The AI logic is implemented using the **Minimax algorithm**, which evaluates all possible future moves and chooses the optimal one for the AI ("agent") player.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### Key Components:
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- **`minimax(board, maximizing)`**: Recursive function to evaluate the best possible move.
+  - Returns the move with the best score depending on whether it's maximizing (X) or minimizing (O) it depends if player chose to be X or O.
+- **`availableActions(board)`**: Finds all empty cells on the board.
+- **`makeMove(board, action, player)`**: Returns a new board state after a move.
+- **`checkWinner(board)`**: Determines if there's a winner.
+- **`isTerminal(board)`**: Checks for terminal states (win or draw).
+- **`utility(board)`**: Assigns numerical values to terminal outcomes (`+1` for X win, `-1` for O win, `0` for draw).
 
-## Get a fresh project
+The AI plays its move during each render cycle using `useEffect`, and a small delay is added for better UX.
 
-When you're ready, run:
+---
+
+## 🧩 Game Logic Summary
+
+- The board is a 3x3 array of nullable strings (`"X" | "O" | null`).
+- `getCurrentPlayer` determines who's turn it is.
+- When it's the AI's turn, it calculates the best move using `minimax`.
+- When the game ends (win or draw), a modal pops up with the result and a reset option.
+
+---
+
+## 💡 Tech Stack
+
+- **Expo** – for fast development and cross-platform support
+- **React Native** – to build the mobile UI
+- **NativeWind** – for Tailwind-like styling in React Native
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
 
 ```bash
-npm run reset-project
+git clone https://github.com/your-username/tic-tac-toe-ai.git
+cd tic-tac-toe-ai
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+```bash
+npm install
+# or
+yarn install
+```
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```bash
+npx expo start
+```
